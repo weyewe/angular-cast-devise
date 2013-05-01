@@ -1,0 +1,83 @@
+<!-- app/views/home/index.html.erb -->
+
+<header>
+  AngularCasts
+</header>
+
+<div >
+	<div ng-controller="SubRedditsCtrl">
+		<table id='subreddit-control'>
+			<tr>
+				<td ng-click='showForm()'>
+					Add
+				</td>
+		
+				<td>
+					<span ng-show='selectedSubReddit' ng-click='destroy()'>Delete</span>
+				</td>
+			</tr>
+		</table>
+	
+	  <div  ng-hide="subRedditCreateMode" id="subreddit-list-container"  >
+		
+	    <ul>
+	      <li ng-repeat="subReddit in subReddits" >
+	        <h3  ng-click='showPosts(subReddit)' ng-class='isSelected(subReddit)'>
+						{{subReddit.name}}  
+					</h3>
+	      </li>
+	    </ul>
+	  </div>
+	
+		<div  ng-show="subRedditCreateMode" id="subreddit-list-container"  >
+		
+	   	<form name="employeeForm" ng-submit="submit()">
+			  <fieldset>
+			 
+			    <label>
+			      <span>SubRedditName:</span>
+			      <input
+			        type="text"
+			        ng-model="newSubReddit.name"
+			        required
+			        autofocus
+			        />
+			    </label> 
+
+			    
+
+			    <div class="formFooter">
+			    
+			      <button type="submit" class="main-button" 
+								ng-click="createSubReddit(newSubReddit)" >Add</button>
+			      <p  ng-click="cancelForm()">Cancel</p>
+			    </div>
+
+			  </fieldset>
+			</form>
+	  </div>
+	
+	</div>
+
+	<div id="post-viewer-container" ng-controller="PostViewerCtrl" style="text-align:center;" >
+		<h2>{{selectedPost.title}}</h2>
+		<h3 ng-show='noImages()'>No IMAGES</h3>
+    <ul>
+      <li ng-repeat="picture in pictureArray" >
+  			<img style='width:50%;' ng-src="{{picture}}" />
+      </li>
+    </ul>
+  </div>
+
+  <div id="post-list-container" ng-controller="PostsCtrl" >
+	
+    <!-- This is where we are showing the shite -->
+		<ul>
+      <li ng-repeat="post in posts" >
+        <h3 ng-click='showPictures(post)' ng-class='isSelected(post)'>
+					{{post.title}}  
+				</h3>
+      </li>
+    </ul>
+  </div>
+</div>
