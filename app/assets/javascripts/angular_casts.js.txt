@@ -1,0 +1,56 @@
+
+var app = angular.module("AngularCasts", ['ngResource']);
+
+
+app.config(['$httpProvider',  function($httpProvider ){
+	$httpProvider.defaults.headers.common['X-CSRF-Token'] = 
+	$('meta[name=csrf-token]').attr('content'); 
+}]
+);
+
+
+app.run(['$rootScope', '$http', function($rootScope, $http){
+	$rootScope.isLoggedIn = true ;
+	$rootScope.auth_token = null;
+	
+	// check the server whether there is currentUser 
+	// console.log("The app run, called for the first time");
+	
+	
+	checkAuthentication = function(){
+		$http.post("/authenticate_auth_token", {
+			auth_token : $rootScope.auth_token 
+		}).success( function(data,status,headers, config){
+			if( data.success !== true){
+				$rootScope.isLoggedIn = false; 
+				$rootScope.auth_token = null;
+			}else{
+				$rootScope.isLoggedIn = true; 
+			}
+		}).error( function(data,status,headers, config){
+			console.log("Shite, it is error");
+			$rootScope.isLoggedIn = false; 
+			$rootScope.auth_token = null;
+		});
+	};
+	
+	if( $rootScope.auth_token === null){
+		$rootScope.isLoggedIn = false; 
+	}else{
+		checkAuthentication(); 
+	}
+	
+	
+}]);
+
+
+// 
+// 
+// 37 - left
+// 
+// 38 - up
+// 
+// 39 - right
+// 
+// 40 - down
+// 

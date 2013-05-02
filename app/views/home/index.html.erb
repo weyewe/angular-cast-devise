@@ -2,14 +2,25 @@
 
 <header>
   AngularCasts
+
+	<span class='login' ng-hide='isLoggedIn'>
+		Login
+	</span>
+	
+	<span class='login'  ng-show='isLoggedIn'>
+		Logout
+	</span>
 </header>
 
-<div >
+
+<div>
 	<div ng-controller="SubRedditsCtrl">
-		<table id='subreddit-control'>
+		
+		<table id='subreddit-control' ng-show='isLoggedIn'>
 			<tr>
 				<td ng-click='showForm()'>
 					Add
+	
 				</td>
 		
 				<td>

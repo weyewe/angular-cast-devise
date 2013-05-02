@@ -10,6 +10,10 @@ gem 'feedzirra'
 gem 'nokogiri'
 
 
+gem 'kaminari'
+gem 'devise'
+gem 'the_role'
+
 
 
 # Gems used only for assets and not required

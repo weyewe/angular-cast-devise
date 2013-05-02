@@ -1,7 +1,13 @@
 AngularCasts::Application.routes.draw do
+  devise_for :users
+
   # get "home/index"
   
   root to: 'home#index'
+  
+  match 'authenticate_auth_token' => 'sessions#authenticate_auth_token', :as => :authenticate_auth_token
+  
+  
   get '/episodes' => 'screencasts#index', format: 'json'
   get '/episodes/:id' => 'screencasts#show', format: 'json'
   

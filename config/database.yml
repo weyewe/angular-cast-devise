@@ -15,7 +15,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: angular_casts_development
+  database: ang_casts_devise_development
   pool: 5
   username: weyewe
 
@@ -40,13 +40,13 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: angular_casts_test
+  database: ang_casts_devise_test
   pool: 5
   username: weyewe
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: angular_casts_production
+  database: ang_casts_devise_production
   pool: 5
   username: weyewe
