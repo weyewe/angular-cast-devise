@@ -1,19 +1,68 @@
 <!-- app/views/home/index.html.erb -->
 
-<header>
+<header ng-controller='HeaderCtrl'>
   AngularCasts
 
-	<span class='login' ng-hide='isLoggedIn'>
+	<span class='login' ng-hide='isLoggedIn' ng-click='showLoginForm()'>
 		Login
 	</span>
 	
-	<span class='login'  ng-show='isLoggedIn'>
+	<span class='login'  ng-show='isLoggedIn' ng-click='destroySession()'>
 		Logout
 	</span>
 </header>
 
 
-<div>
+<div ng-show='isLoginFormShown'>
+	<!-- login form -->
+
+
+	<div id="login-form-container"  style="text-align:center;" ng-controller="LoginCtrl" >
+		<h2>Login FORM</h2>
+		
+		<div     >
+		
+	   	<form name="sessionForm" ng-submit="submit()">
+			  <fieldset>
+			 
+			    <label>
+			      <span>Email:</span>
+			      <input
+			        type="text"
+			        ng-model="email"
+			        required
+			        autofocus
+			        />
+			    </label> 
+					
+					<br />
+			
+					<label>
+			      <span>Password:</span>
+			      <input
+			        type="password"
+			        ng-model="password"
+			        required
+			        />
+			    </label>
+			
+			    <div class="formFooter">
+			      <button type="submit" class="main-button" 
+								ng-click="createSession()">Login</button>
+			      <p ng-click="cancelForm()">Cancel</p>
+			    </div>
+
+			  </fieldset>
+			</form>
+	  </div>
+  </div>
+
+</div>
+
+
+
+<!-- protected content -->
+<div ng-show='isProtectedContentShown'>
 	<div ng-controller="SubRedditsCtrl">
 		
 		<table id='subreddit-control' ng-show='isLoggedIn'>

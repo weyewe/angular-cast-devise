@@ -62,6 +62,7 @@
 							$scope.subReddits.push value 
 			
 			loadSubReddits() 
-	
+		
+			console.log("subreddit ctrl is ready")
 	]
 

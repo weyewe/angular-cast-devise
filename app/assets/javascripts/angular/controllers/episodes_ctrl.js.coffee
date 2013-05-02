@@ -24,5 +24,7 @@
 						)
 			
 			loadEpisodes() 
+			
+			console.log("episodes_ctrl is ready")
 	]
 

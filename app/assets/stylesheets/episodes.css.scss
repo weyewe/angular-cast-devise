@@ -71,6 +71,17 @@ header {
   }
 }
 
+#login-form-container {
+	background-color: rgb(250,250,250);
+	position: absolute;
+	width: 68%;
+	top: 37px;
+	left: 16%;
+	bottom: 0;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
 #post-viewer-container {
   background-color: rgb(250,250,250);
   position: absolute;

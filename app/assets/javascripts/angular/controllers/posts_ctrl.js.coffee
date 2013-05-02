@@ -105,5 +105,7 @@
 					.success (result, status, headers, config) -> 
 						angular.forEach result.data.children, (value) -> 
 							$scope.posts.push value.data 
+							
+			console.log("posts_ctrl is ready")
 	]
 

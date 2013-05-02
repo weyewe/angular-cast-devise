@@ -1,8 +1,9 @@
 @app.factory 'SubReddit',
 	[
 		'$resource',
-		($resource) ->
-			$resource '/sub_reddits/:id', 
+		'TokenHandler',
+		($resource, TokenHandler) ->
+			resource = $resource '/sub_reddits/:id', 
 				{ id: "@id"},
 				{
 					'create' : { method : "POST"},
@@ -12,6 +13,10 @@
 					'destroy' : { method : "DELETE"}
 				}
 			
+			resource = TokenHandler.wrapActions( resource, 
+				['create' , 'index', 'show', 'update' , 'destroy'])
+				
+			resource
 	]
 
  

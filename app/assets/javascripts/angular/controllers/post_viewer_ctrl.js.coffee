@@ -17,5 +17,6 @@
 						$scope.selectedPost = args.post
 						$scope.pictureArray = args.pictures
 			)
+			console.log("post_viewer is ready")
 					
 	]

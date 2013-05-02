@@ -17,6 +17,10 @@ AngularCasts::Application.routes.draw do
   
   resources :sub_reddits 
   
+  namespace :api do
+    devise_for :users
+  end
+  
 
   # scope :api do
   #   get "/screencasts(.:format)" => "screencasts#index"

@@ -1,18 +1,37 @@
 @app = angular.module "AngularCasts", ['ngResource'] 
  
+# include the X-csrf 
 @app.config [
 		'$httpProvider',
 		($httpProvider) -> 
 			$httpProvider.defaults.headers.common['X-CSRF-Token'] =  $('meta[name=csrf-token]').attr('content')
 	]
+ 
 
 
 @app.run [
 		'$rootScope', 
 		'$http',
 		($rootScope, $http) -> 
-			$rootScope.isLoggedIn = true 
+		# rootScope will be handling the basic authentication
+			$rootScope.email = null;
+			
+		
+			$rootScope.isLoggedIn = false 
 			$rootScope.auth_token = null 
+			
+			# basic feature: show the data, no login form
+			$rootScope.isProtectedContentShown = null 
+			$rootScope.isLoginFormShown = null 
+			
+			$rootScope.showLogin = -> 
+				$rootScope.isProtectedContentShown = false 
+				$rootScope.isLoginFormShown = true 
+			
+			$rootScope.showProtectedContent = ->
+				$rootScope.isProtectedContentShown = true 
+				$rootScope.isLoginFormShown = false	
+		
 			
 			checkAuthentication =  -> 
 				$http.post(
@@ -33,9 +52,13 @@
 						$rootScope.auth_token = null
 				)
 			
+			
+			# methods to initiate the whole magic
 			if $rootScope.auth_token == null
 				$rootScope.isLoggedIn = false
 			else
 				checkAuthentication() 
+				
+			$rootScope.showProtectedContent() 
 	]
 
