@@ -1,7 +1,7 @@
 <!-- app/views/home/index.html.erb -->
 
 <header ng-controller='HeaderCtrl'>
-  AngularCasts
+  AngularCasts 
 
 	<span class='login' ng-hide='isLoggedIn' ng-click='showLoginForm()'>
 		Login
@@ -73,7 +73,7 @@
 				</td>
 		
 				<td>
-					<span ng-show='selectedSubReddit' ng-click='destroy()'>Delete</span>
+					<span ng-show='anySelectedObject()' ng-click='destroy()'>Delete</span>
 				</td>
 			</tr>
 		</table>
@@ -82,7 +82,7 @@
 		
 	    <ul>
 	      <li ng-repeat="subReddit in subReddits" >
-	        <h3  ng-click='showPosts(subReddit)' ng-class='isSelected(subReddit)'>
+	        <h3  ng-click='selectSubReddit(subReddit)' ng-class='isSelected(subReddit)'>
 						{{subReddit.name}}  
 					</h3>
 	      </li>

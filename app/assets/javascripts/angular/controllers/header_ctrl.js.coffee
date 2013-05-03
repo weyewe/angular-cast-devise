@@ -5,8 +5,10 @@
 		'$rootScope',
 		'TokenHandler',
 		'$http',
-		($scope, $rootScope, TokenHandler, $http) -> 
-			
+		'SubReddit',
+		($scope, $rootScope, TokenHandler, $http,SubReddit) -> 
+		 
+		
 			
 			$scope.showLoginForm = ->
 				console.log 'showing login form' 

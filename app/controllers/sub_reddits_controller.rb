@@ -8,7 +8,8 @@ class SubRedditsController < ApplicationController
     
     if @object.valid?
       render :json => {
-        :success => true 
+        :success => true ,
+        :sub_reddit => @object 
       }
     else
       render :json => {
