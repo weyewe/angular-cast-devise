@@ -54,12 +54,14 @@
 				
 				
 			 
-					
+					# can we change this with SubReddit.query 
 			loadSubReddits = -> 
-				$http.get('/sub_reddits.json')
-					.success (data,status, headers, config) ->
+				# SubReddit.query
+				SubReddit.index {}, 
+					(data  ) ->
 						angular.forEach data, (value) ->
 							$scope.subReddits.push value 
+	
 			
 			loadSubReddits() 
 		

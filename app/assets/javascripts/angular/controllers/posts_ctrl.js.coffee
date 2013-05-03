@@ -4,7 +4,8 @@
 		'$http',
 		'$resource',
 		'$rootScope',
-		($scope, $http, $resource, $rootScope) -> 
+		'RedditAPI',
+		($scope, $http, $resource, $rootScope, RedditAPI) -> 
 			$scope.posts = []
 			$scope.selectedSubReddit = null
 			$scope.selectedPost = null 
@@ -89,22 +90,33 @@
 	 
 		
 			loadPosts = (subReddit) -> 
-				baseUrl = 'http://www.reddit.com/r'; 
-				subRedditName = subReddit.name;
-				limit = 100 ;
-				recordsDirection = '' 
-        
-				finalUrl = 	baseUrl + '/' + 
-												subRedditName + '/' + 
-													'hot.json' + '?' + 
-													'limit=' + limit + '&' + 
-													'jsonp=JSON_CALLBACK' + '&' + 
-													'format=json'
+				successFunction = (result) -> 
+					angular.forEach result.data.children, (value) ->
+				  	$scope.posts.push value.data 
 				
-				$http.jsonp( finalUrl)
-					.success (result, status, headers, config) -> 
-						angular.forEach result.data.children, (value) -> 
-							$scope.posts.push value.data 
+				
+				errorFunction = ( result) ->
+					console.log "It is error"
+					
+				RedditAPI.index {subRedditName : subReddit.name }, 
+					successFunction, 
+					errorFunction
+				# baseUrl = 'http://www.reddit.com/r'; 
+				# subRedditName = subReddit.name;
+				# limit = 100 ;
+				# recordsDirection = '' 
+				#         
+				# finalUrl = 	baseUrl + '/' + 
+				# 								subRedditName + '/' + 
+				# 									'hot.json' + '?' + 
+				# 									'limit=' + limit + '&' + 
+				# 									'jsonp=JSON_CALLBACK' + '&' + 
+				# 									'format=json'
+				# 
+				# $http.jsonp( finalUrl)
+				# 	.success (result, status, headers, config) -> 
+				# 		angular.forEach result.data.children, (value) -> 
+				# 			$scope.posts.push value.data 
 							
 			console.log("posts_ctrl is ready")
 	]
